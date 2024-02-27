@@ -10,7 +10,7 @@ interface Project {
   projectStatus: string;
 }
 
-const SimpleInputData = () => {
+const SimpleGetData = () => {
   const [data, setData] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -56,4 +56,4 @@ const SimpleInputData = () => {
   );
 };
 
-export default SimpleInputData;
+export default SimpleGetData;
