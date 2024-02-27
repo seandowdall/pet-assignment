@@ -1,13 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-// The Project interface remains the same
+// Updated Project interface to mark projectName and projectStatus as optional
 interface Project {
   id: string;
-  projectName: string;
-  projectStatus: string;
+  projectName?: string;
+  projectStatus?: string;
 }
 
 const SimpleGetData = () => {
@@ -20,12 +20,14 @@ const SimpleGetData = () => {
     setError(null);
 
     try {
-      const res = await fetch(`/api/items`);
+      const res = await fetch(
+        `https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items`
+      );
       if (!res.ok) throw new Error("Failed to fetch data");
       const jsonData = await res.json();
-      // Check for the 'data' key in the JSON response
-      if (jsonData && Array.isArray(jsonData.data)) {
-        setData(jsonData.data); // Use the 'data' array from the response
+      if (jsonData && Array.isArray(jsonData)) {
+        // Directly use jsonData as it is the expected array of projects
+        setData(jsonData);
       } else {
         throw new Error("Data is not in expected format");
       }
@@ -48,8 +50,9 @@ const SimpleGetData = () => {
       <ul>
         {data.map((project) => (
           <li key={project.id}>
-            {project.projectName} - {project.projectStatus}
-          </li> // Display projectName and projectStatus
+            {project.projectName ? project.projectName : "No Name"} -{" "}
+            {project.projectStatus ? project.projectStatus : "No Status"}
+          </li> // Display projectName and projectStatus, with defaults for missing data
         ))}
       </ul>
     </div>
