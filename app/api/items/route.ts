@@ -1,5 +1,5 @@
 export async function GET() {
-  const res = await fetch(`${process.env.API_URL}/pets`, {
+  const res = await fetch(`${process.env.API_URL}/items`, {
     headers: {
       "Content-Type": "application/json",
     },

@@ -31,40 +31,45 @@ const DataForm: React.FC = () => {
   const { handleSubmit, register, reset, watch } = methods;
 
   const onSubmit = async (data: FormValues) => {
-    const url = process.env.NEXT_PUBLIC_URL || "";
-
+    // Handling single JSON object submission
     if (data.singleJsonObject) {
       try {
         const jsonObject = JSON.parse(data.singleJsonObject);
         console.log("Single JSON Object:", jsonObject);
 
-        // const response = await axios.put(`${url}/pets`, jsonObject, {
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-        // console.log("Server Response:", response.data);
+        // POST request for single JSON object
+        const response = await fetch(`/api/pet`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(jsonObject),
+        });
 
+        const responseData = await response.json();
+        console.log("Server Response:", responseData);
         // TODO: Provide user feedback about successful submission
       } catch (error) {
-        console.error("Error parsing JSON:", error);
-        console.error("Failed to send JSON data:", error);
+        console.error("Error parsing JSON or sending data:", error);
         // TODO: Provide user feedback about failure
       }
     }
 
+    // Handling JSON file submission
     if (data.jsonFile && data.jsonFile.length > 0) {
       const file = data.jsonFile[0];
       const formData = new FormData();
       formData.append("jsonFile", file);
 
       try {
-        // const response = await axios.put(url, formData, {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data",
-        //   },
-        // });
-        // console.log("Server Response:", response.data);
+        // POST request for file upload
+        const response = await fetch(`/api/pet`, {
+          method: "POST",
+          body: formData, // Note: When using FormData, you don't manually set Content-Type; the browser does it.
+        });
+
+        const responseData = await response.json();
+        console.log("Server Response:", responseData);
         // TODO: Provide user feedback about successful file submission
       } catch (error) {
         console.error("Failed to send JSON file:", error);
