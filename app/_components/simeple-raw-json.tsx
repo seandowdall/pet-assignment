@@ -62,11 +62,11 @@ const SimpleRawJson = () => {
   // Existing JSX...
 
   return (
-    <div>
+    <div className="mt-10">
       {/* Existing form for ProjectFormData */}
 
       <form onSubmit={handleJsonSubmit}>
-        <div>
+        <div className="flex flex-col">
           <label htmlFor="jsonInput">Paste your JSON here</label>
           <textarea
             id="jsonInput"

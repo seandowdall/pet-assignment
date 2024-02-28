@@ -54,7 +54,7 @@ const SimpleFileUploadJson = () => {
   };
 
   return (
-    <div>
+    <div className="mt-10 ml-10">
       <form>
         <div>
           <label htmlFor="fileInput">Upload your JSON file</label>

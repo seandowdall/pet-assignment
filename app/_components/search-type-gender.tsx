@@ -6,9 +6,9 @@ import { Pet } from "@/types/type";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 
-const SearchPets = () => {
+const SearchTypeGender = () => {
   const [type, setType] = useState("Dog");
-  const [status, setStatus] = useState("Available");
+  const [gender, setGender] = useState("Male");
   const [results, setResults] = useState<Pet[]>([]);
   const [error, setError] = useState("");
 
@@ -17,9 +17,9 @@ const SearchPets = () => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-      console.log(`${apiUrl}/available-pets?type=${type}&status=${status}`);
+      console.log(`${apiUrl}/available-pets?type=${type}&gender=${gender}`);
       const response = await fetch(
-        `${apiUrl}/available-pets?type=${type}&status=${status}`
+        `${apiUrl}/available-pets-type-gender?type=${type}&gender=${gender}`
       );
 
       if (!response.ok) {
@@ -46,9 +46,9 @@ const SearchPets = () => {
         </label>
         <label>
           Status:
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="Available">Available</option>
-            <option value="Unavailable">Unavailable</option>
+          <select value={gender} onChange={(e) => setGender(e.target.value)}>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
             {/* ... other statuses ... */}
           </select>
         </label>
@@ -68,4 +68,4 @@ const SearchPets = () => {
   );
 };
 
-export default SearchPets;
+export default SearchTypeGender;

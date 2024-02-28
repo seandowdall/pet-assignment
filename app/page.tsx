@@ -1,12 +1,11 @@
 import DisplayAllCards from "./_components/display-all-cards";
 
-import SimpleSendData from "./_components/simple-send-data";
-import SimpleGetData from "./_components/simple-get-data";
-
 import SimpleFileUploadJson from "./_components/simple-file-upload-json";
 import SimpleRawJson from "./_components/simeple-raw-json";
 import SearchPets from "./_components/search-pets";
 import SearchById from "./_components/search-by-id";
+import SearchTypeAge from "./_components/search-type-age";
+import SearchTypeGender from "./_components/search-type-gender";
 
 export default function Home() {
   return (
@@ -22,8 +21,18 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col space-y-5">
-        <h1 className="text-3xl font-medium">Perform queried search:</h1>
+        <h1 className="text-3xl font-medium">
+          Perform queried search on type and availability:
+        </h1>
         <SearchPets />
+        <h1 className="text-3xl font-medium">
+          Perform queried search on type and age:
+        </h1>
+        <SearchTypeAge />
+        <h1 className="text-3xl font-medium">
+          Perform queried search on type and gender:
+        </h1>
+        <SearchTypeGender />
         <h1 className="text-3xl font-medium">Search By Id:</h1>
         <SearchById />
       </div>

@@ -6,9 +6,9 @@ import { Pet } from "@/types/type";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 
-const SearchPets = () => {
+const SearchTypeAge = () => {
   const [type, setType] = useState("Dog");
-  const [status, setStatus] = useState("Available");
+  const [age, setAge] = useState("1"); // Use age instead of status
   const [results, setResults] = useState<Pet[]>([]);
   const [error, setError] = useState("");
 
@@ -16,12 +16,10 @@ const SearchPets = () => {
     setError("");
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-      console.log(`${apiUrl}/available-pets?type=${type}&status=${status}`);
+      // Adjust the fetch URL to use `age` parameter instead of `status`
       const response = await fetch(
-        `${apiUrl}/available-pets?type=${type}&status=${status}`
+        `${apiUrl}/available-pets-type-age?type=${type}&age=${age}`
       );
-
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -45,12 +43,13 @@ const SearchPets = () => {
           </select>
         </label>
         <label>
-          Status:
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="Available">Available</option>
-            <option value="Unavailable">Unavailable</option>
-            {/* ... other statuses ... */}
-          </select>
+          Age:
+          <input
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            placeholder="Pet Age"
+          />
         </label>
         <Button onClick={handleSearch}>
           <Search />
@@ -68,4 +67,4 @@ const SearchPets = () => {
   );
 };
 
-export default SearchPets;
+export default SearchTypeAge;
