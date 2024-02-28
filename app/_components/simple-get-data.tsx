@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 
 // Updated Project interface to mark projectName and projectStatus as optional
-interface Project {
+interface Pet {
   id: string;
-  projectName?: string;
-  projectStatus?: string;
+  name: string;
+  breed: string;
+  color: string;
+  description: string;
+  gender: string;
+  weight: number;
 }
 
 const SimpleGetData = () => {
-  const [data, setData] = useState<Project[]>([]);
+  const [data, setData] = useState<Pet[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,10 +52,10 @@ const SimpleGetData = () => {
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       <ul>
-        {data.map((project) => (
-          <li key={project.id}>
-            {project.projectName ? project.projectName : "No Name"} -{" "}
-            {project.projectStatus ? project.projectStatus : "No Status"}
+        {data.map((pet) => (
+          <li key={pet.id}>
+            {pet.name ? pet.name : "No Name"} -{" "}
+            {pet.breed ? pet.breed : "No Breed"}
           </li> // Display projectName and projectStatus, with defaults for missing data
         ))}
       </ul>
