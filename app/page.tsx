@@ -5,6 +5,7 @@ import SimpleGetData from "./_components/simple-get-data";
 
 import SimpleFileUploadJson from "./_components/simple-file-upload-json";
 import SimpleRawJson from "./_components/simeple-raw-json";
+import SearchPets from "./_components/search-pets";
 
 export default function Home() {
   return (
@@ -15,7 +16,9 @@ export default function Home() {
         <SimpleRawJson />
         <SimpleFileUploadJson />
       </div>
-      {/* <AddDataDialog /> */}
+      <div>
+        <SearchPets />
+      </div>
 
       <div className="mt-10 pb-10">
         <DisplayAllCards />
