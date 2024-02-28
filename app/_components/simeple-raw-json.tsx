@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 
 interface ProjectFormData {
@@ -76,9 +77,9 @@ const SimpleRawJson = () => {
             cols={50}
           />
         </div>
-        <button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting}>
           Submit JSON
-        </button>
+        </Button>
       </form>
       {isSubmitting && <p>Submitting...</p>}
       {submitError && <p>Error: {submitError}</p>}

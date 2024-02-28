@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { PencilIcon } from "lucide-react";
 import EditPetForm from "./edit-pet-form";
 import DeleteAlertDialog from "./delete-alert-dialog";
+import Image from "next/image";
 
 const PetCard: React.FC<{ pet: Pet }> = ({ pet }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -43,6 +44,22 @@ const PetCard: React.FC<{ pet: Pet }> = ({ pet }) => {
         <CardHeader>
           <CardTitle>{pet.name}</CardTitle>
           <CardDescription>{pet.description}</CardDescription>
+          {pet.images &&
+            pet.images.map((image, index) => (
+              <div key={index} style={{ marginBottom: "10px" }}>
+                {image.url ? (
+                  <img
+                    width={100}
+                    height={100}
+                    src={image.url}
+                    alt={image.description || "Pet image"}
+                    style={{ borderRadius: "8px" }}
+                  />
+                ) : (
+                  <p>Image URL is missing</p>
+                )}
+              </div>
+            ))}
         </CardHeader>
         <CardContent>
           <ul>
