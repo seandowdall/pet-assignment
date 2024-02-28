@@ -1,18 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Pet } from "@/types/type";
 import React, { useEffect, useState } from "react";
-
-// Updated Project interface to mark projectName and projectStatus as optional
-interface Pet {
-  id: string;
-  name: string;
-  breed: string;
-  color: string;
-  description: string;
-  gender: string;
-  weight: number;
-}
 
 const SimpleGetData = () => {
   const [data, setData] = useState<Pet[]>([]);

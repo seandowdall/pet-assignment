@@ -1,33 +1,53 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+
+import { Pet } from "@/types/type";
 import PetCard from "./pet-card";
 
-const pets = [
-  // This should be your dynamic data, but here's an example structure
-  {
-    name: "Max",
-    type: "Dog",
-    breed: "Labrador",
-    age: "5",
-    gender: "Male",
-    color: "Black",
-  },
-  {
-    name: "Bella",
-    type: "Cat",
-    breed: "Siamese",
-    age: "3",
-    gender: "Female",
-    color: "White",
-  },
-  // Add more pets as needed
-];
-
 const DisplayAllCards = () => {
+  const [data, setData] = useState<Pet[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function getData() {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch(
+        `https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items`
+      );
+      if (!res.ok) throw new Error("Failed to fetch data");
+      const jsonData = await res.json();
+      if (jsonData && Array.isArray(jsonData)) {
+        setData(jsonData);
+      } else {
+        throw new Error("Data is not in expected format");
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Fetch data on component mount
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div className="grid grid-cols-3 gap-4">
-      {pets.map((pet, index) => (
-        <PetCard key={index} pet={pet} />
-      ))}
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {!loading &&
+        !error &&
+        data.map((pet) => <PetCard key={pet.id} pet={pet} />)}
     </div>
   );
 };

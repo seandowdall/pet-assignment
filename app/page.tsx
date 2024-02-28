@@ -7,7 +7,7 @@ import SimpleSendData from "./_components/simple-send-data";
 import SimpleGetData from "./_components/simple-get-data";
 
 import SimpleFileUploadJson from "./_components/simple-file-upload-json";
-import SimpleRawJson from "./_components/simple-raw-json";
+import SimpleRawJson from "./_components/simeple-raw-json";
 
 export default function Home() {
   return (
@@ -20,9 +20,9 @@ export default function Home() {
       </div>
       {/* <AddDataDialog /> */}
 
-      {/* <div className="mt-10">
+      <div className="mt-10">
         <DisplayAllCards />
-      </div> */}
+      </div>
     </main>
   );
 }
