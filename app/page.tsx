@@ -5,8 +5,9 @@ import DisplayAllCards from "./_components/display-all-cards";
 
 import SimpleSendData from "./_components/simple-send-data";
 import SimpleGetData from "./_components/simple-get-data";
-import SimpleRawJson from "./_components/simeple-raw-json";
+
 import SimpleFileUploadJson from "./_components/simple-file-upload-json";
+import SimpleRawJson from "./_components/simple-raw-json";
 
 export default function Home() {
   return (
