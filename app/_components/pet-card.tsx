@@ -49,8 +49,8 @@ const PetCard: React.FC<{ pet: Pet }> = ({ pet }) => {
               <div key={index} style={{ marginBottom: "10px" }}>
                 {image.url ? (
                   <img
-                    width={100}
-                    height={100}
+                    width={200}
+                    height={200}
                     src={image.url}
                     alt={image.description || "Pet image"}
                     style={{ borderRadius: "8px" }}
