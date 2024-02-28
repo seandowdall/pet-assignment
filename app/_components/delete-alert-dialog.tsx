@@ -14,7 +14,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 
-const DeleteAlertDialog = () => {
+// In DeleteAlertDialog component
+
+interface DeleteAlertDialogProps {
+  onDeleteConfirm: () => void;
+}
+
+const DeleteAlertDialog: React.FC<DeleteAlertDialogProps> = ({
+  onDeleteConfirm,
+}) => {
   return (
     <div>
       <AlertDialog>
@@ -33,7 +41,9 @@ const DeleteAlertDialog = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
+            <AlertDialogAction onClick={onDeleteConfirm}>
+              Continue
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

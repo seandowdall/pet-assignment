@@ -19,6 +19,26 @@ const PetCard: React.FC<{ pet: Pet }> = ({ pet }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEditForm = () => setIsEditing(!isEditing);
+
+  const deletePet = async () => {
+    try {
+      const response = await fetch(
+        `https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items/${pet.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete the pet.");
+      }
+
+      // Optionally refresh the list of pets here or navigate away
+      alert("Pet deleted successfully.");
+    } catch (error) {
+      alert((error as Error).message);
+    }
+  };
   return (
     <div>
       <Card>
@@ -40,7 +60,7 @@ const PetCard: React.FC<{ pet: Pet }> = ({ pet }) => {
               <PencilIcon />
             </Button>
 
-            <DeleteAlertDialog />
+            <DeleteAlertDialog onDeleteConfirm={deletePet} />
           </div>
         </CardFooter>
       </Card>
