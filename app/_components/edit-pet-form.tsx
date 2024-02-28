@@ -26,16 +26,14 @@ const EditPetForm: React.FC<EditPetFormProps> = ({ pet, onClose }) => {
     e.preventDefault();
     setIsSubmitting(true); // Now correctly defined, so this line will work
     try {
-      const response = await fetch(
-        `https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items/${pet.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formValues),
-        }
-      );
+      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await fetch(`${apiUrl}/items/${pet.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update pet information");

@@ -23,16 +23,14 @@ const SimpleFileUploadJson = () => {
         const jsonObjects = JSON.parse(text);
 
         for (const jsonObject of jsonObjects) {
-          const response = await fetch(
-            "https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items",
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(jsonObject),
-            }
-          );
+          const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+          const response = await fetch(`${apiUrl}/items`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(jsonObject),
+          });
 
           if (!response.ok) {
             const errorText = await response.text();

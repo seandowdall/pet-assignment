@@ -14,9 +14,8 @@ const SimpleGetData = () => {
     setError(null);
 
     try {
-      const res = await fetch(
-        `https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items`
-      );
+      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${apiUrl}/items`);
       if (!res.ok) throw new Error("Failed to fetch data");
       const jsonData = await res.json();
       if (jsonData && Array.isArray(jsonData)) {

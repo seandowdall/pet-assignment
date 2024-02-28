@@ -32,17 +32,14 @@ const SimpleRawJson = () => {
     try {
       // Parse the input to ensure it is valid JSON
       const jsonData = JSON.parse(rawJsonInput);
-
-      const response = await fetch(
-        "https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(jsonData),
-        }
-      );
+      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await fetch(`${apiUrl}/items`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to submit JSON data");

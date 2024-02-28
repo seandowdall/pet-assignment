@@ -31,16 +31,14 @@ const SimpleSendData = () => {
     setSubmitError(null);
 
     try {
-      const response = await fetch(
-        "https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await fetch(`${apiUrl}/items`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to submit data");

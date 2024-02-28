@@ -22,12 +22,10 @@ const PetCard: React.FC<{ pet: Pet }> = ({ pet }) => {
 
   const deletePet = async () => {
     try {
-      const response = await fetch(
-        `https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/items/${pet.id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await fetch(`${apiUrl}/items/${pet.id}`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to delete the pet.");

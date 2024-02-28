@@ -12,8 +12,9 @@ const SearchPets = () => {
   const handleSearch = async () => {
     setError("");
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const response = await fetch(
-        `https://gvkby53kz9.execute-api.eu-west-1.amazonaws.com/available-pets?type=${type}&status=${status}`
+        `${apiUrl}/available-pets?type=${type}&status=${status}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
