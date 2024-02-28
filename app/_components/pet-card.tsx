@@ -1,5 +1,6 @@
-import React from "react";
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -10,9 +11,14 @@ import {
 } from "@/components/ui/card";
 import { Pet } from "@/types/type";
 import { Button } from "@/components/ui/button";
-import { PencilIcon, Trash } from "lucide-react";
+import { PencilIcon } from "lucide-react";
+import EditPetForm from "./edit-pet-form";
+import DeleteAlertDialog from "./delete-alert-dialog";
 
 const PetCard: React.FC<{ pet: Pet }> = ({ pet }) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const toggleEditForm = () => setIsEditing(!isEditing);
   return (
     <div>
       <Card>
@@ -30,16 +36,15 @@ const PetCard: React.FC<{ pet: Pet }> = ({ pet }) => {
         </CardContent>
         <CardFooter>
           <div className="flex flex-row space-x-6">
-            <Button variant={"outline"}>
+            <Button variant={"outline"} onClick={toggleEditForm}>
               <PencilIcon />
             </Button>
 
-            <Button variant={"destructive"}>
-              <Trash />
-            </Button>
+            <DeleteAlertDialog />
           </div>
         </CardFooter>
       </Card>
+      {isEditing && <EditPetForm pet={pet} onClose={toggleEditForm} />}
     </div>
   );
 };
