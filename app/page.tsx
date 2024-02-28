@@ -11,12 +11,15 @@ import SimpleRawJson from "./_components/simple-raw-json";
 
 export default function Home() {
   return (
-    <main className="container mx-auto mt-10 bg-green-200">
+    <main className="container mx-auto mt-10 bg-gray-200">
+      <div className="flex flex-row space-y-10">
+        <SimpleGetData />
+        <SimpleSendData />
+        <SimpleRawJson />
+        <SimpleFileUploadJson />
+      </div>
       {/* <AddDataDialog /> */}
-      <SimpleGetData />
-      <SimpleSendData />
-      <SimpleRawJson />
-      <SimpleFileUploadJson />
+
       {/* <div className="mt-10">
         <DisplayAllCards />
       </div> */}
